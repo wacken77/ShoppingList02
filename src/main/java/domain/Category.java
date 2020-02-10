@@ -1,5 +1,6 @@
 package domain;
 
+
 public enum Category {
-    CATEGORY,
+    CATEGORY,  // This enum value not used. Remove it or use it in your code.
 }
