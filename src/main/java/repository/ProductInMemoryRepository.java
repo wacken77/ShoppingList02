@@ -5,9 +5,9 @@ import domain.Product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductInMemoryRepository {
-    Map<Long, Product> products = new HashMap<>();
-    Long productIdSequence = 0L;
+public class ProductInMemoryRepository {  // Where interface for this class? Like ProductRepository or Database?  
+    Map<Long, Product> products = new HashMap<>();  // fields mus be private
+    Long productIdSequence = 0L;   // fields mus be private
 
     public Product insert(Product product) {
         product.setId(productIdSequence);
