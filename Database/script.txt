@@ -1,0 +1,19 @@
+CREATE DATABASE productlist CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE TABLE products (
+product_id BIGINT NOT NULL AUTO_INCREMENT,
+product_name VARCHAR(200) NOT NULL,
+product_price decimal NOT NULL,
+product_reduced_price decimal NOT NULL,
+product_category VARCHAR(200) NOT NULL,
+product_discount double NOT NULL,
+product_description VARCHAR(200) NOT NULL,
+
+PRIMARY KEY (product_id)
+
+)
+ENGINE = InnoDB
+AUTO_INCREMENT = 1000;
+
+
+
+
