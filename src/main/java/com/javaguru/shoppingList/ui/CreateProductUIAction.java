@@ -20,6 +20,7 @@ public class CreateProductUIAction {
         Product product = new Product();
         product.setName(productNameInputByUser());
         productService.setPrice(productPriceInputByUser(), product);
+        //product.setPrice(productPriceInputByUser());
         productService.createProduct(product);
         printOutCreatedProduct(product);
     }

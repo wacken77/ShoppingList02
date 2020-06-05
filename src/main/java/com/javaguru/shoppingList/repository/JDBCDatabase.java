@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 import java.sql.*;
 import java.util.*;
 
-@Component
-@Profile("local")
+//@Component
+//@Profile("local")
 public class JDBCDatabase implements Database {
 
     @Value( "${jdbc.url}" )
@@ -18,6 +18,11 @@ public class JDBCDatabase implements Database {
 
     @Value( "${driverClass}" )
     private String driverClass;
+
+    @Override
+    public List<Product> findAll() {
+        return null;
+    }
 
     @Value( "${database.user.name}" )
     private String userName;
@@ -78,7 +83,7 @@ public class JDBCDatabase implements Database {
     }
 
     @Override
-    public Product update(Product product, Long id) {
+    public Product update(Product product) {
         Connection connection = null;
         try {
             connection = getConnection();
@@ -91,7 +96,8 @@ public class JDBCDatabase implements Database {
             preparedStatement.setDouble(4, product.getDiscount());
             preparedStatement.setString(5, product.getDescription());
             preparedStatement.setString(6, product.getCategory().getCategoryName());
-            preparedStatement.setLong(7, id);
+            //preparedStatement.setLong(7, id);
+            preparedStatement.setLong(7, product.getId());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -128,7 +134,8 @@ public class JDBCDatabase implements Database {
                 product.setDescription(resultSet.getString("product_description"));
 
                 String categoryStr = resultSet.getString("product_category").toUpperCase();
-                Category category = new Category(categoryStr);
+                //Category category = new Category(categoryStr);
+                Category category = new Category();
                 product.setCategory(category);
             }
         } catch (Throwable e) {
@@ -141,85 +148,88 @@ public class JDBCDatabase implements Database {
         return product;
     }
 
-    @Override
-    public Category insertCategory(Category category) {
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            String sql = "insert into CATEGORIES(category_id, category_name) values(default, ?)";
-            PreparedStatement preparedStatement =
-                    connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, category.getCategoryName());
-            preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.getGeneratedKeys();
-            if (rs.next()){
-                category.setId(rs.getLong(1));
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while execute addProduct");
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(connection);
-        }
-        return category;
-    }
+//    @Override
+//    public Category insertCategory(Category category) {
+//        Connection connection = null;
+//        try {
+//            connection = getConnection();
+//            String sql = "insert into CATEGORIES(category_id, category_name) values(default, ?)";
+//            PreparedStatement preparedStatement =
+//                    connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+//            preparedStatement.setString(1, category.getCategoryName());
+//            preparedStatement.executeUpdate();
+//            ResultSet rs = preparedStatement.getGeneratedKeys();
+//            if (rs.next()){
+//                category.setId(rs.getLong(1));
+//            }
+//        } catch (Throwable e) {
+//            System.out.println("Exception while execute addProduct");
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        } finally {
+//            closeConnection(connection);
+//        }
+//        return category;
+//    }
 
-@Override
-    public Category findCategory(String name) {
-    Category category = new Category(null);
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            String sql = "select * from CATEGORIES where category_name = ?";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, name);
+//@Override
+//    public Category findCategory(String name) {
+//    //Category category = new Category(null);
+//    Category category = new Category();
+//        Connection connection = null;
+//        try {
+//            connection = getConnection();
+//            String sql = "select * from CATEGORIES where category_name = ?";
+//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//            preparedStatement.setString(1, name);
+//
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while (resultSet.next()) {
+//                category.setId(resultSet.getLong("category_id"));
+//                category.setCategoryName(resultSet.getString("category_name"));
+//
+//            }
+//
+//        } catch (Throwable e) {
+//            System.out.println("Exception while getting product by id");
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        } finally {
+//            closeConnection(connection);
+//        }
+//        return category;
+//
+//    }
 
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                category.setId(resultSet.getLong("category_id"));
-                category.setCategoryName(resultSet.getString("category_name"));
-
-            }
-
-        } catch (Throwable e) {
-            System.out.println("Exception while getting product by id");
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(connection);
-        }
-        return category;
-
-    }
-
-    @Override
-    public Set<Category> getCategories() {
-        Set<Category> categories = new HashSet<>();
-        Connection connection = null;
-        try {
-            connection = getConnection();
-            String sql = "select * from CATEGORIES";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-
-                String categoryStr = "default";
-                Category category = new Category(categoryStr);
-                category.setId(resultSet.getLong("category_id"));
-                category.setCategoryName(resultSet.getString("category_name"));
-                categories.add(category);
-            }
-        } catch (Throwable e) {
-            System.out.println("Exception while getting products - getProducts");
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        } finally {
-            closeConnection(connection);
-        }
-        return categories;
-    }
+//    @Override
+//    public Set<Category> getCategories() {
+//        Set<Category> categories = new HashSet<>();
+//        //List<Category> categories = new ArrayList<>();
+//        Connection connection = null;
+//        try {
+//            connection = getConnection();
+//            String sql = "select * from CATEGORIES";
+//            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+//
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//            while (resultSet.next()) {
+//
+//                String categoryStr = "default";
+//                //Category category = new Category(categoryStr);
+//                Category category = new Category();
+//                category.setId(resultSet.getLong("category_id"));
+//                category.setCategoryName(resultSet.getString("category_name"));
+//                categories.add(category);
+//            }
+//        } catch (Throwable e) {
+//            System.out.println("Exception while getting products - getProducts");
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        } finally {
+//            closeConnection(connection);
+//        }
+//        return categories;
+//    }
 
     @Override
     public Map<Long, Product> getProducts() {
@@ -240,7 +250,8 @@ public class JDBCDatabase implements Database {
                 product.setDiscount(resultSet.getDouble("product_discount"));
                 product.setDescription(resultSet.getString("product_description"));
                 String categoryStr = resultSet.getString("product_category").toUpperCase();
-                Category category = new Category(categoryStr);
+                //Category category = new Category(categoryStr);
+                Category category = new Category();
                 product.setCategory(category);
                 products.put(resultSet.getLong("product_id"), product);
             }

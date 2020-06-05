@@ -31,7 +31,7 @@ public class SetProductPriceUIAction {
 
     public void execute() {
         Product product = productService.findProductById(getProductIdFromUser());
-        SetPriceResponse response = productService.setPrice(productPriceInputByUser(),product);
+        SetPriceResponse response = productService.updatePrice(productPriceInputByUser(),product);
         operationResultMessage(response);
     }
 

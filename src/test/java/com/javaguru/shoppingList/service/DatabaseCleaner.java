@@ -46,9 +46,13 @@ public class DatabaseCleaner {
         try {
             connection = getConnection();
             String sql = "delete from PRODUCTS";
+            String sql2 = "delete from CATEGORIES";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql);
             preparedStatement.executeUpdate();
+            PreparedStatement preparedStatement1 =
+                    connection.prepareStatement(sql2);
+            preparedStatement1.executeUpdate();
 
         } catch (Throwable e) {
             System.out.println("Exception while execute addProduct");

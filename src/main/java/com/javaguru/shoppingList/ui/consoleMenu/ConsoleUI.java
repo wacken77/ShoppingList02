@@ -32,6 +32,7 @@ public class ConsoleUI {
                 mainMenuSwitch(userInput);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
                 System.out.println("Error! Please try again.");
             }
         }

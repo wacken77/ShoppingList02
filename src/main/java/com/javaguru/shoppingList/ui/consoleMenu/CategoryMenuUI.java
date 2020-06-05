@@ -33,6 +33,7 @@ public class CategoryMenuUI {
                 categoryMenuSwitch(userInput);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
                 System.out.println("Error! Please try again.");
             }
         }
@@ -44,6 +45,7 @@ public class CategoryMenuUI {
         System.out.println("3. Categorize product");
         System.out.println("4. View contents");
         System.out.println("5. Find category");
+        System.out.println("6. Find category by Name (test)");
         System.out.println("0. Exit to main menu");
     }
 
@@ -62,6 +64,9 @@ public class CategoryMenuUI {
                 showContentsUIAction.showAvailableProducts();
                 break;
             case 5:
+                findCategoryUIAction.execute2();
+                break;
+            case 6:
                 findCategoryUIAction.execute();
                 break;
             case 0:

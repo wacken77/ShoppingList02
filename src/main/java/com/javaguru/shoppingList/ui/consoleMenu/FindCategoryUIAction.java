@@ -21,12 +21,22 @@ public class FindCategoryUIAction {
     public void execute() {
         System.out.println(categoryService.findCategoryByName(categoryNameInputByUser()));
     }
+    public void execute2() {
+        System.out.println(categoryService.findCategoryById(categoryIdInputByUser()));
+    }
 
     public String categoryNameInputByUser() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter category name: ");
         String categoryName = scanner.nextLine();
         return categoryName;
+    }
+
+    public Long categoryIdInputByUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter category ID: ");
+        Long id = scanner.nextLong();
+        return id;
     }
 
     public void printOutFoundCategory(Category newCategory) {

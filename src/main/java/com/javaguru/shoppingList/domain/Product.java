@@ -1,15 +1,35 @@
 package com.javaguru.shoppingList.domain;
 import java.math.BigDecimal;
+import javax.persistence.*;
 
+
+@Entity
+@Table(name = "products")
 public class Product {
-    private Long id;
-    private String name;
-    private BigDecimal price = BigDecimal.valueOf(0);
-    private BigDecimal reducedPrice;
-    private Category category;
-    private double discount;
-    private String description = "empty";
 
+    @Id
+    @Column(name = "product_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "product_name", nullable = false)
+    private String name;
+
+    @Column(name = "product_price", precision = 19, scale = 4)
+    private BigDecimal price = BigDecimal.valueOf(0);
+
+    @Column(name = "product_reduced_price", precision = 19, scale = 4)
+    private BigDecimal reducedPrice;
+
+    @ManyToOne
+    @JoinColumn(name = "product_category")
+    private Category category;
+
+    @Column(name = "product_discount", precision = 19, scale = 4)
+    private double discount;
+
+    @Column(name = "product_description", nullable = false)
+    private String description = "empty";
 
     public void setDescription(String description) {
         this.description = description;
@@ -74,8 +94,8 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", price with discount=" + reducedPrice +
-                ", category=" + category.getCategoryName() +
                 ", discount=" + discount + "%" +
+                ", category=" + category +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -19,6 +19,11 @@ public class InMemoryDatabase implements Database {
         return products;
     }
 
+    @Override
+    public List<Product> findAll() {
+        return null;
+    }
+
     public Set<Category> getCategories() {
         return categories;
     }
@@ -30,8 +35,14 @@ public class InMemoryDatabase implements Database {
         return product;
     }
 
+//    @Override
+//    public Product update(Product product, Long id) {
+//        Product product1 = new Product();
+//        return product1 ;
+//    }
+
     @Override
-    public Product update(Product product, Long id) {
+    public Product update(Product product) {
         Product product1 = new Product();
         return product1 ;
     }
@@ -40,28 +51,28 @@ public class InMemoryDatabase implements Database {
         return products.get(id);
     }
 
-    @Override
-    public Category insertCategory(Category category) {
-        category.setId(categoryIdSequence);
-        categoryIdSequence++;
-        categories.add(category);
-        return category;
-    }
+//    @Override
+//    public Category insertCategory(Category category) {
+//        category.setId(categoryIdSequence);
+//        categoryIdSequence++;
+//        categories.add(category);
+//        return category;
+//    }
 
-    @Override
-    public Category findCategory(String name) {
-        return null;
-    }
-
-    public Category findCategoryByCategory(String categoryName) {
-        Category category = null;
-        for (Category ct : categories) {
-            if (ct.getCategoryName().equals(categoryName)) {
-                category = ct;
-            }
-        }
-        return category;
-    }
+//    @Override
+//    public Category findCategory(String name) {
+//        return null;
+//    }
+//
+//    public Category findCategoryByCategory(String categoryName) {
+//        Category category = null;
+//        for (Category ct : categories) {
+//            if (ct.getCategoryName().equals(categoryName)) {
+//                category = ct;
+//            }
+//        }
+//        return category;
+//    }
 }
 
 

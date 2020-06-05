@@ -22,7 +22,8 @@ public class CreateCategoryUIAction {
     }
 
     public void execute() {
-        Category newCategory = new Category(categoryNameInputByUser());
+        Category newCategory = new Category();
+        newCategory.setCategoryName(categoryNameInputByUser());
         categoryService.addCategory(newCategory);
         printOutCreatedCategory(newCategory);
     }
@@ -41,10 +42,10 @@ public class CreateCategoryUIAction {
     public void  categorizeProduct() {
         long id = getProductIdFromUser();
         Product existingProduct = productService.findProductById(id);
-        checkIfProductExists(existingProduct);
+        addCategoryToProduct(existingProduct);
     }
 
-    public void checkIfProductExists(Product product) {
+    public void addCategoryToProduct(Product product) {
         if (product.getId() == null) {
             System.out.println("The id doesn't exist, please try again ");
         } else {
@@ -58,9 +59,7 @@ public class CreateCategoryUIAction {
         if (existingCategory.getId() == null) {
             System.out.println("Wrong category name, please try again ");
         } else {
-            product.setCategory(existingCategory);
-            categoryService.setCategory(product);
-            System.out.println("Positive outcome");
+            categoryService.setCategory(product, existingCategory);
         }
     }
 

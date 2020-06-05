@@ -1,6 +1,7 @@
 package com.javaguru.shoppingList.ui;
 
 import com.javaguru.shoppingList.domain.Category;
+import com.javaguru.shoppingList.domain.Product;
 import com.javaguru.shoppingList.service.CategoryService;
 import com.javaguru.shoppingList.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ShowContentsUIAction {
     }
 
     public void showAvailableProducts() {
-        productService.showAvailableProducts();
+        System.out.println("Here's the list of all products: ");
+        for (Product product: productService.showAvailableProducts()) {
+            System.out.println(product);
+        }
     }
 }

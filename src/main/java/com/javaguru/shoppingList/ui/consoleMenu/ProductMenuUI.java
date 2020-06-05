@@ -39,6 +39,7 @@ public class ProductMenuUI {
                 productMenuSwitch(userInput);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                e.printStackTrace();
                 System.out.println("Error! Please try again.");
             }
         }
