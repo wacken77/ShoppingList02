@@ -9,7 +9,7 @@ import java.util.*;
 
 //@Component
 @Profile({"old"})
-public class InMemoryDatabase implements Database {
+public class InMemoryDatabase  {
     private Map<Long, Product> products = new HashMap<>();
     private Long productIdSequence = 0L;
     private Long categoryIdSequence = 0L;
@@ -19,7 +19,7 @@ public class InMemoryDatabase implements Database {
         return products;
     }
 
-    @Override
+    //@Override
     public List<Product> findAll() {
         return null;
     }
@@ -41,7 +41,7 @@ public class InMemoryDatabase implements Database {
 //        return product1 ;
 //    }
 
-    @Override
+    //@Override
     public Product update(Product product) {
         Product product1 = new Product();
         return product1 ;

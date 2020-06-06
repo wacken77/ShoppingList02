@@ -14,19 +14,22 @@ public class ProductMenuUI {
     private SetProductDiscountUIAction setProductDiscountUIAction;
     private SetProductDescriptionUIAction setProductDescriptionUIAction;
     private SetProductPriceUIAction setProductPriceUIAction;
+    private DeleteProductUIAction deleteProductUIAction;
 
     @Autowired
     public ProductMenuUI(CreateProductUIAction createProductUIAction,
                          FindProductUIAction findProductUIAction,
                          SetProductDiscountUIAction setProductDiscountUIAction,
                          SetProductDescriptionUIAction setProductDescriptionUIAction,
-                                     SetProductPriceUIAction setProductPriceUIAction) {
+                                     SetProductPriceUIAction setProductPriceUIAction,
+                         DeleteProductUIAction deleteProductUIAction) {
 
         this.createProductUIAction = createProductUIAction;
         this.findProductUIAction = findProductUIAction;
         this.setProductDiscountUIAction = setProductDiscountUIAction;
         this.setProductDescriptionUIAction = setProductDescriptionUIAction;
         this.setProductPriceUIAction = setProductPriceUIAction;
+        this.deleteProductUIAction = deleteProductUIAction;
     }
 
     public void execute() {
@@ -51,6 +54,7 @@ public class ProductMenuUI {
         System.out.println("3. Set a discount");
         System.out.println("4. Describe the product");
         System.out.println("5. Change price of the product");
+        System.out.println("6. Delete product");
         System.out.println("0. Exit to main menu");
     }
 
@@ -70,6 +74,9 @@ public class ProductMenuUI {
                 break;
             case 5:
                 setProductPriceUIAction.execute();
+                break;
+            case 6:
+                deleteProductUIAction.execute();
                 break;
             case 0:
                 exitMenu = true;

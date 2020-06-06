@@ -20,6 +20,7 @@ public class HibernateProductRepository implements Database {
     @Autowired
     private SessionFactory sessionFactory;
 
+
     @Override
     public Product insert(Product product) {
         sessionFactory.getCurrentSession().save(product);
@@ -43,6 +44,22 @@ public class HibernateProductRepository implements Database {
             System.out.println("Product with id = '" + id + "' was not found in database.");
         }
         return product;
+    }
+
+    @Override
+    public boolean deleteProduct(Long id) {
+       Product product = (Product) sessionFactory.getCurrentSession()
+               .createCriteria(Product.class)
+               .add(Restrictions.eq("id", id))
+               .uniqueResult();
+       if(product == null) {
+           System.out.println("The product with id " + id + " is not found");
+           return false;
+       } else {
+           sessionFactory.getCurrentSession()
+                   .delete(product);
+           return true;
+       }
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.*;
 
 //@Component
 //@Profile("local")
-public class JDBCDatabase implements Database {
+public class JDBCDatabase  {
 
     @Value( "${jdbc.url}" )
     private String jdbcUrl;
@@ -19,7 +19,7 @@ public class JDBCDatabase implements Database {
     @Value( "${driverClass}" )
     private String driverClass;
 
-    @Override
+    //@Override
     public List<Product> findAll() {
         return null;
     }
@@ -52,7 +52,7 @@ public class JDBCDatabase implements Database {
         }
     }
 
-    @Override
+   // @Override
     public Product insert(Product product) {
         Connection connection = null;
         try {
@@ -82,7 +82,7 @@ public class JDBCDatabase implements Database {
         return product;
     }
 
-    @Override
+    //@Override
     public Product update(Product product) {
         Connection connection = null;
         try {
@@ -114,7 +114,7 @@ public class JDBCDatabase implements Database {
         return product;
     }
 
-    @Override
+    //@Override
     public Product findProductById(Long id) {
         Product product = new Product();
         Connection connection = null;
@@ -231,7 +231,7 @@ public class JDBCDatabase implements Database {
 //        return categories;
 //    }
 
-    @Override
+    //@Override
     public Map<Long, Product> getProducts() {
         Map<Long, Product> products = new HashMap();
         Connection connection = null;

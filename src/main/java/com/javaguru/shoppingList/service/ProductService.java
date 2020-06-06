@@ -25,6 +25,10 @@ public class ProductService {
         Product createdProduct = repository.insert(product);
         return createdProduct.getId();
     }
+    @Transactional
+    public void deleteProduct(Long id) {
+    repository.deleteProduct(id);
+    }
 
     public Product findProductById(Long id) {
       Product productToBeFound = repository.findProductById(id);

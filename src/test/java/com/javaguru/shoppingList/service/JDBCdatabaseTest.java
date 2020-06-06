@@ -114,11 +114,18 @@ public class JDBCdatabaseTest {
         Product toBeUpdated = database.findProductById(product.getId());
         toBeUpdated.setCategory(categoryRepository.findCategory("test category"));
         database.update(toBeUpdated);
-
-
-
-
-
-
+    }
+    @Test
+    public void deleteProductTest() {
+        Product product = new Product();
+        product.setName("Bad product");
+        product.setPrice(BigDecimal.valueOf(100));
+        product.setReducedPrice(BigDecimal.valueOf(50));
+        product.setDiscount(50);
+        product.setDescription("Some awful product");
+        database.insert(product);
+        assertNotNull(database.findProductById(product.getId()));
+        database.deleteProduct(product.getId());
+        assertEquals(database.findProductById(product.getId()), null);
     }
 }
